@@ -1,0 +1,67 @@
+{
+	"file" : "index.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"address" : 
+			{
+				"index" : 0,
+				"order" : 100,
+				"text" : "Address",
+				"type" : "textinput",
+				"value" : "127.0.0.1"
+			},
+			"apiport" : 
+			{
+				"index" : 1,
+				"order" : 101,
+				"text" : "API Port",
+				"type" : "textinput",
+				"value" : "1202"
+			},
+			"containername" : 
+			{
+				"index" : 2,
+				"order" : 102,
+				"text" : "Container Name",
+				"type" : "textinput",
+				"value" : "docker-stats-api"
+			},
+			"debugmode" : 
+			{
+				"index" : 5,
+				"order" : 105,
+				"text" : "Debug Mode",
+				"type" : "bool",
+				"value" : false
+			},
+			"pullinterval" : 
+			{
+				"index" : 3,
+				"order" : 103,
+				"text" : "Pull Interval",
+				"type" : "textinput",
+				"value" : "5000"
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"showtoast" : 
+			{
+				"index" : 4,
+				"order" : 104,
+				"text" : "Show Toast",
+				"type" : "bool",
+				"value" : true
+			}
+		}
+	},
+	"title" : "YOUR WALLPAPER NAME",
+	"type" : "web",
+	"version" : 0
+}
