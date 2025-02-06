@@ -32,4 +32,10 @@ Only this repository and `foresthouse2316/docker-stats-api` in the DockerHub is 
     <th>Repository</th>
     <th>Description</th>
   </tr>
+  <tr>
+    <td><img src="./screenshots/DockerStats-BasicEdition.png" style="width: auto; height: 150px; object-fit: cover;"></td>
+    <td><a href="https://github.com/ForestHouse2316/WallpaperEngine-DockerStats">DockerStats:<br/>Basic Edition</a></td>
+    <td>Just <b>BASIC</b><br/>
+        This is the wallpaper built from this repository.</td>
+  </tr>
 </table>
