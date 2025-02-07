@@ -76,7 +76,10 @@ If you are using IaaS (AWS, Oracle, Azure...), **open same port it in the cloud 
 
 ### Subscribe wallpapers on STEAM 📥
 Choose the wallpapers you want.
-[**Here**](./documents/WallpaperRepos.md)'s the list of repositories that made by using this repository.
+[Here's the list of repositories](./documents/WallpaperRepos.md) that made by using this repository.
+And the wallpaper built with this repository is [**this**](https://steamcommunity.com/sharedfiles/filedetails/?id=3421613856).
+Because it's having `incompatible` tag for now, you're only able to subscribe it with this link.
+(In-app subscribe is disabled for `DockerStats: Basic Edition` 🥲)
 
 
 ### Type server information on WallpaperEngine 🖥️
