@@ -19,6 +19,29 @@ Basically follows `MPL 2.0` for all files in here.
 Additionally, I hope you to follow the rules above.
 That rules are not mandatory, but if you can, I hope you to follow them.
 
+## Getting started
+
+### Prepare repository
+You can fork, or copy the core files to make your own wallpaper.
+Fork can sync(update) with the origianl repository whenever you want, but only one fork per user or group available.
+
+Recommended method is fork.
+If you want to make more, use GitHub organization to fork again or just copy and paste the codes.
+
+Don't worry too much about non-fork method.
+Major updates of this repository will be the addition and enhancement of basic UI.
+So it won't give a significant impact to your project. 
+And because API is being managed by docker hub,
+you can just pull `foresthouse2316/docker-stats-api:lates` to update your container image if there is a change about it.
+
+### Make Vue3 environment
+Install NodeJS if you don't have.
+Use the version above `v19.7.0`. Also works well on `v22.13.1 LTS`.
+If there's an error related to the NodeJS version, please make an issue for it.
+
+Go to the project folder in local and type `npm install` to install node_modules.
+And test your setup with `npm run serve`.
+If works well, you're done!
 
 ## Make a theme
 Feel free to modify Vue components with your favourites!
@@ -61,7 +84,7 @@ because raw values are divided with 1024 in `App.vue`.
 But this used the notation that doesn't insert "i" like KB or MB to unify units of the RAM usage and others.
 
 ### API
-In this section, you'll learn how to request to your server running `docker-stats-api`.\
+In this section, you'll learn how to request to your server running `docker-stats-api`.
 You can use `fetch()` in JS, `request` moudle in Python to send **GET** request to your server.
 
 > ℹ️ The examples below are written in situation with the following environment:
