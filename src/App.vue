@@ -8,10 +8,21 @@
     <StatItem name="RX" :value="rx" :auto-data-unit="true" />
     <StatItem name="Read (aggregate)" :value="read" :auto-data-unit="true" />
     <StatItem name="Write (aggregate)" :value="write" :auto-data-unit="true" />
+
+    <!-- SHOW_ALL_UI -->
+    <div class="show-all-ui-container" v-if="SHOW_ALL_UI">
+        <StatItem name="CPU" :value="cpu" unit="%" />
+        <StatItem name="RAM" :value="ram" :auto-data-unit="true" />
+        <StatItem name="TX" :value="tx" :auto-data-unit="true" />
+        <StatItem name="Read (aggregate)" :value="read" :auto-data-unit="true" />
+        <ToastList :messages="{ msg: 'SHOW_ALL_UI\nDesign your own theme with this mode!' }" />
+        <ToastList :messages="{ msg: 'This toast box will contain very loooooooooooooooooooong messages and newlines.\n1\n2\n3\n4\n5\n6\n7\n8\n9' }" />
+    </div>
 </template>
 
 <script setup>
 // comp
+import { getRandom } from "./utils";
 import StatItem from "./components/StatItem.vue";
 import ToastList from "./components/ToastList.vue";
 
@@ -20,12 +31,16 @@ import { ref, computed } from "vue";
 const FETCH_TIMEOUT = 20000;
 
 // user-properties variables (linked with WallpaperEngine)
-const ADDRESS = ref(process.env.ADDRESS ?? "127.0.0.1"); // address
-const API_PORT = ref(process.env.API_PORT ?? "1202"); // apiport
-const CONTAINER_NAME = ref(process.env.CONTAINER_NAME ?? "docker-stats-api"); // containername
-const PULL_INTERVAL = ref(Number(process.env.PULL_INTERVAL ?? 5000)); // pullinterval
-const SHOW_TOAST = ref(process.env.SHOW_TOAST === "true"); // showtoast
-const DEBUG_MODE = ref(process.env.DEBUG_MODE === "true"); // debugmode
+const ADDRESS = ref(process.env.VUE_APP_ADDRESS ?? "127.0.0.1"); // address
+const API_PORT = ref(process.env.VUE_APP_API_PORT ?? "1202"); // apiport
+const CONTAINER_NAME = ref(process.env.VUE_APP_CONTAINER_NAME ?? "docker-stats-api"); // containername
+const PULL_INTERVAL = ref(Number(process.env.VUE_APP_PULL_INTERVAL ?? 5000)); // pullinterval
+const SHOW_TOAST = ref(process.env.VUE_APP_SHOW_TOAST === "true"); // showtoast
+const DEBUG_MODE = ref(process.env.VUE_APP_DEBUG_MODE === "true"); // debugmode
+
+// development options
+const SHOW_ALL_UI = process.env.VUE_APP_SHOW_ALL_UI === "true";
+const RAND_STAT_VAL = process.env.VUE_APP_RAND_STAT_VAL === "true";
 
 // stats (ref)
 const cpu = ref(0);
@@ -99,7 +114,15 @@ window.wallpaperPropertyListener = {
 // fetch stats data
 let puller;
 const API_URL = ref(`http://${ADDRESS.value}:${API_PORT.value}/${CONTAINER_NAME.value}`);
-refreshPuller();
+if (RAND_STAT_VAL) {
+    puller = setInterval(() => {
+        cpu.value = getRandom(0, 100);
+        ram.value = getRandom(0, 1099511627776); // ~ 1TB
+        tx.value = getRandom(0, 1073741824); // ~ 1GB
+        read.value = getRandom(0, 1048576); // ~ 1MB
+    }, 1000);
+}
+else refreshPuller();
 
 function refreshPuller() {
     API_URL.value = `http://${ADDRESS.value}:${API_PORT.value}/${CONTAINER_NAME.value}`;
@@ -198,5 +221,25 @@ body {
 
 .de2 {
     border: green 1px solid;
+}
+
+.show-all-ui-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+}
+.show-all-ui-container > * {
+    flex-shrink: 0 !important;
+    margin-bottom: 5rem;
+    position: relative !important;
+    border: solid 1px red;
 }
 </style>
