@@ -24,6 +24,18 @@ That rules are not mandatory, but if you can, I hope you to follow them.
 Feel free to modify Vue components with your favourites!
 Just change the UI using Vue. That's all.
 
+### Adding .env.develop referring to [.env.example](../.env.example)
+User-preferences are only available int WallpaperEngine.
+So, in development, we need environment variables to test our project.
+
+You can modify major and development options by making `.env.develop` file.
+Copy all from `.env.example` and paste it.
+Change the values to what you want.
+For more information, please check the comments in `.env.example`.
+> ℹ️ While `.env.example` does not affect to the project and is tracked by git, `.env.development` affects to the project and registered in `.gitignore`.
+
+
+
 ### [App.vue](../src/App.vue)
 `<template>` is listing all components.
 Make components and layer them from here.
