@@ -8,3 +8,13 @@ export function sleep(ms) {
 export function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function getRandom(from, to) {
+    let diff = to - from;
+    return Math.random() * diff;
+}
+
+export function getRandomInt(from, to) {
+    let diff = to - from;
+    return Math.floor(Math.random() * (diff+1));
+}
