@@ -16,7 +16,7 @@ This will pull ARM64 or AMD64 version according to your platform.
 
 ### Build and create manually 🔧
 If you can't even trust that image, you can make it for yourself.\
-[This docker-stats-api folder](./docker-stats-api) has all files to build the container.\
+[This docker-stats-api folder](../docker-stats-api) has all files to build the container.\
 Download the folder and execute this:
 ```bash
 # Execute below in the folder 'docker-stats-api'
@@ -64,16 +64,16 @@ sudo iptables -I INPUT 1 -p tcp --dport 1202 -j ACCEPT
 If you are using IaaS (AWS, Oracle, Azure...), **open same port it in the cloud management window.**
 
 
-## [Take a look at the wallpaper list](./documents/WallpaperRepos.md) and subscribe it on STEAM 📥
+## [Take a look at the wallpaper list](./WallpaperRepos.md) and subscribe it on STEAM 📥
 Choose the wallpapers you want.
-[**Here**](./documents/WallpaperRepos.md)'s the list of repositories that made by using this repository.
+[**Here**](./WallpaperRepos.md)'s the list of repositories that made by using this repository.
 
 
 ## Type server information on WallpaperEngine 🖥️
 Select the downloaded wallpaper in WallpaperEngine.
 Then you will be able to see some options like this:
 
-![](./documents/images/UserProperties.png)
+![](./images/UserProperties.png)
 
 Input the server address, port number, and other information about your server to receive the docker stats data.
 
@@ -109,7 +109,7 @@ Then, you can find your server's minimum interval with **debug mode**.
 Turn on `Show Toast` and `Debug Mode` options.
 And adjust your interval when toast messages pop up like this:
 
-![](./documents/images/AdjustPullInterval.png)
+![](./images/AdjustPullInterval.png)
 
 When the toast messages following `GET > Fetched > Value Updated` sequence, you can use without timeout error.
 But if order is not like that, it will cause a number of errors soon.
