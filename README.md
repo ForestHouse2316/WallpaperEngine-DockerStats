@@ -74,7 +74,7 @@ sudo iptables -I INPUT 1 -p tcp --dport 1202 -j ACCEPT
 If you are using IaaS (AWS, Oracle, Azure...), **open same port it in the cloud management window.**
 
 
-### Subscribe wallpapers on STEAM 📥
+### [Take a look at the wallpaper list](./documents/WallpaperRepos.md) and subscribe it on STEAM 📥
 Choose the wallpapers you want.
 [**Here**](./documents/WallpaperRepos.md)'s the list of repositories that made by using this repository.
 
