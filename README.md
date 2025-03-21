@@ -31,3 +31,6 @@ Add your own theme into this project and share it to others!\
 You can request to register your wallpaper repository on [HERE➡️](./documents/WallpaperRepos.md) by making PR.
 
 Click the title, and let's go to the **Developer Guide** 🌠
+
+## License
+To be updated
