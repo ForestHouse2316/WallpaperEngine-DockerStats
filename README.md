@@ -1,17 +1,22 @@
 # WallpaperEngine : DockerStats 🐋📈
 ![](./documents/images/Logo.png)
-> ℹ️ [Logo.png](./documents/images/Logo.png) contains Docker and Wallpaper Engine's official logos.
+> [!note]
+> [Logo.png](./documents/images/Logo.png) contains Docker and Wallpaper Engine's official logos.
 > - Copyright © Docker Inc.
 > - Copyright © Wallpaper Engine Team
 
 Check your container's stats on the desktop!\
 With `Wallpaper Engine` 😎
-> ℹ️ If the repository you're watching now is a forked one, also check the [original repository](https://github.com/ForestHouse2316/WallpaperEngine-DockerStats) too!
+
+-----
 
 ## Getting started (User Guide) 😊
 
+> [!important]
+> If the repository you're watching now is a forked one, also check the [original repository](https://github.com/ForestHouse2316/WallpaperEngine-DockerStats) too!
 
 ### Pull the image or build it manually 🖼️
+> [!caution]
 > **Note that only `foresthouse2316/docker-stats-api` is the official image for now.**\
 **DO NOT DOWNLOAD OR USE THAT FROM OTHER SITES OR UNKNOWN SOURCES ⚠️**\
 It might harm your server and take permission about your docker.
@@ -124,7 +129,8 @@ And adjust your interval when toast messages pop up like this:
 When the toast messages following `GET > Fetched > Value Updated` sequence, you can use without timeout error.
 But if order is not like that, it will cause a number of errors soon.
 
-> ℹ️ Even if the toast messages following that sequence, timeout error may occur intermittently if your server or local computer is overloaded.
+> [!note]
+> Even if the toast messages following that sequence, timeout error may occur intermittently if your server or local computer is overloaded.
 
 
 ## [Make your own wallpaper (Developer Guide) ⚙️](./documents/DeveloperGuide.md)
