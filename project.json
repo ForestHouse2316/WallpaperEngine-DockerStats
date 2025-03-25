@@ -6,40 +6,48 @@
 		{
 			"address" : 
 			{
-				"index" : 0,
-				"order" : 100,
+				"index" : 1,
+				"order" : 101,
 				"text" : "Address",
 				"type" : "textinput",
 				"value" : "127.0.0.1"
 			},
 			"apiport" : 
 			{
-				"index" : 1,
-				"order" : 101,
+				"index" : 2,
+				"order" : 102,
 				"text" : "API Port",
 				"type" : "textinput",
 				"value" : "1202"
 			},
 			"containername" : 
 			{
-				"index" : 2,
-				"order" : 102,
+				"index" : 3,
+				"order" : 103,
 				"text" : "Container Name",
 				"type" : "textinput",
 				"value" : "docker-stats-api"
 			},
 			"debugmode" : 
 			{
-				"index" : 5,
-				"order" : 105,
+				"index" : 6,
+				"order" : 106,
 				"text" : "Debug Mode",
 				"type" : "bool",
 				"value" : false
 			},
+			"instructionsareontheworkshoppage" : 
+			{
+				"index" : 0,
+				"order" : 100,
+				"text" : "Instructions are on the workshop page!",
+				"type" : "group",
+				"value" : ""
+			},
 			"pullinterval" : 
 			{
-				"index" : 3,
-				"order" : 103,
+				"index" : 4,
+				"order" : 104,
 				"text" : "Pull Interval",
 				"type" : "textinput",
 				"value" : "5000"
@@ -53,8 +61,8 @@
 			},
 			"showtoast" : 
 			{
-				"index" : 4,
-				"order" : 104,
+				"index" : 5,
+				"order" : 105,
 				"text" : "Show Toast",
 				"type" : "bool",
 				"value" : true
