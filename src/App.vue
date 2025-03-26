@@ -4,8 +4,8 @@
     <h1>{{ CONTAINER_NAME }}</h1>
     <StatItem name="CPU" :value="cpu" unit="%" />
     <StatItem name="RAM" :value="ram" :auto-data-unit="true" />
-    <StatItem name="TX" :value="tx" :auto-data-unit="true" />
-    <StatItem name="RX" :value="rx" :auto-data-unit="true" />
+    <StatItem name="TX (aggregate)" :value="tx" :auto-data-unit="true" />
+    <StatItem name="RX (aggregate)" :value="rx" :auto-data-unit="true" />
     <StatItem name="Read (aggregate)" :value="read" :auto-data-unit="true" />
     <StatItem name="Write (aggregate)" :value="write" :auto-data-unit="true" />
 
@@ -26,7 +26,7 @@ import { getRandom } from "./utils";
 import StatItem from "./components/StatItem.vue";
 import ToastList from "./components/ToastList.vue";
 
-import { ref, computed } from "vue";
+import { ref, computed, onBeforeUnmount } from "vue";
 
 const FETCH_TIMEOUT = 20000;
 
@@ -113,7 +113,13 @@ window.wallpaperPropertyListener = {
 
 // fetch stats data
 let puller;
+let pullerCnt = 0;
+let pullers = {};
 const API_URL = ref(`http://${ADDRESS.value}:${API_PORT.value}/${CONTAINER_NAME.value}`);
+onBeforeUnmount(() => {
+    if (puller) clearInterval(puller);
+});
+
 if (RAND_STAT_VAL) {
     puller = setInterval(() => {
         cpu.value = getRandom(0, 100);
@@ -121,60 +127,74 @@ if (RAND_STAT_VAL) {
         tx.value = getRandom(0, 1073741824); // ~ 1GB
         read.value = getRandom(0, 1048576); // ~ 1MB
     }, 1000);
-}
-else refreshPuller();
+} else refreshPuller();
 
 function refreshPuller() {
     API_URL.value = `http://${ADDRESS.value}:${API_PORT.value}/${CONTAINER_NAME.value}`;
     clearInterval(puller);
-    puller = setInterval(fetchData, PULL_INTERVAL.value);
+    puller = setInterval(fetchClosure(pullerCnt), PULL_INTERVAL.value);
+    pullers[pullerCnt++] = puller;
 }
-function fetchData() {
-    if (DEBUG_MODE.value) makeToast(`GET > ${API_URL.value}`, 1);
-    fetch(API_URL.value, { signal: AbortSignal.timeout(FETCH_TIMEOUT) })
-        .then((res) => res.json())
-        .then((stat) => {
-            if (DEBUG_MODE.value) makeToast("< Fetched", 1);
+function fetchClosure(pullerID) {
+    let intervalRef;
+    return function fetchData() {
+        // get self
+        if (intervalRef == undefined) {
+            intervalRef = pullers[pullerID] ?? makeToast("Failed to get the interval reference.", 3);
+            delete pullers[pullerID];
+        }
+        // check clear condition
+        if (intervalRef !== puller || intervalRef == undefined) {
+            clearInterval(intervalRef);
+            return;
+        }
 
-            // Catch API error
-            if (stat.error != null) {
-                makeToast(stat, 3);
-                return;
-            }
+        if (DEBUG_MODE.value) makeToast(`GET > ${API_URL.value}`, 1);
+        fetch(API_URL.value, { signal: AbortSignal.timeout(FETCH_TIMEOUT) })
+            .then((res) => res.json())
+            .then((stat) => {
+                if (DEBUG_MODE.value) makeToast("< Fetched", 1);
 
-            // CPU
-            cpu.value = 0;
-            let cpuDelta = stat.cpu_stats.cpu_usage.total_usage - stat.precpu_stats.cpu_usage.total_usage;
-            let sysDelta = stat.cpu_stats.system_cpu_usage - stat.precpu_stats.system_cpu_usage;
-            let onlineCpu = stat.cpu_stats.online_cpus ?? 1;
+                // Catch API error
+                if (stat.error != null) {
+                    makeToast(stat, 3);
+                    return;
+                }
 
-            if (cpuDelta > 0 && sysDelta > 0) {
-                cpu.value = (cpuDelta / sysDelta) * onlineCpu * 100;
-            }
+                // CPU
+                cpu.value = 0;
+                let cpuDelta = stat.cpu_stats.cpu_usage.total_usage - stat.precpu_stats.cpu_usage.total_usage;
+                let sysDelta = stat.cpu_stats.system_cpu_usage - stat.precpu_stats.system_cpu_usage;
+                let onlineCpu = stat.cpu_stats.online_cpus ?? 1;
 
-            // RAM
-            ram.value = stat.memory_stats.usage ?? 0;
+                if (cpuDelta > 0 && sysDelta > 0) {
+                    cpu.value = (cpuDelta / sysDelta) * onlineCpu * 100;
+                }
 
-            // TX/RX
-            let txSum = 0,
-                rxSum = 0;
-            for (const adapter in stat.networks) {
-                txSum += stat.networks[adapter].tx_bytes ?? 0;
-                rxSum += stat.networks[adapter].rx_bytes ?? 0;
-            }
-            tx.value = txSum;
-            rx.value = rxSum;
+                // RAM
+                ram.value = stat.memory_stats.usage ?? 0;
 
-            // I/O
-            let ioStat = stat.blkio_stats.io_service_bytes_recursive;
-            read.value = ioStat[0].value ?? 0;
-            write.value = ioStat[1].value ?? 0;
+                // TX/RX
+                let txSum = 0,
+                    rxSum = 0;
+                for (const adapter in stat.networks) {
+                    txSum += stat.networks[adapter].tx_bytes ?? 0;
+                    rxSum += stat.networks[adapter].rx_bytes ?? 0;
+                }
+                tx.value = txSum;
+                rx.value = rxSum;
 
-            if (DEBUG_MODE.value) makeToast("Value updated", 1);
-        })
-        .catch((err) => {
-            makeToast(`Error on fetch : ${err}`, 3);
-        });
+                // I/O
+                let ioStat = stat.blkio_stats.io_service_bytes_recursive;
+                read.value = ioStat[0].value ?? 0;
+                write.value = ioStat[1].value ?? 0;
+
+                if (DEBUG_MODE.value) makeToast("Value updated", 1);
+            })
+            .catch((err) => {
+                makeToast(`Error on fetch : ${err}`, 3);
+            });
+    };
 }
 </script>
 
