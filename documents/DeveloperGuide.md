@@ -3,8 +3,9 @@
 ## Necessary things to do ⚠️
 
 ### On your repository
-- ⚠️ **DO NOT SHARE CUSTOMISED VERSION OF `docker-stats-api` AS THE OFFICIAL IMAGE**.
-If you want some improved features in `docker-stats-api`, it would be better to make PR.
+> [!warning]
+> **DO NOT SHARE CUSTOMISED VERSION OF `docker-stats-api` AS THE OFFICIAL IMAGE**.
+- If you want some improved features in `docker-stats-api`, it would be better to make PR.
 If you need to do something you want, **make the source codes public** so that the users can build it for themselves.
 This is also for security.
 - Attach your STEAM Workshop URL or name to make it easy to find your wallpaper 😋
@@ -32,7 +33,8 @@ You can modify major and development options by making `.env.develop` file.
 Copy all from `.env.example` and paste it.
 Change the values to what you want.
 For more information, please check the comments in `.env.example`.
-> ℹ️ While `.env.example` does not affect to the project and is tracked by git, `.env.development` affects to the project and registered in `.gitignore`.
+> [!note]
+> While `.env.example` does not affect to the project and is tracked by git, `.env.development` affects to the project and registered in `.gitignore`.
 
 
 
@@ -68,15 +70,16 @@ If you set option `autoDataUnit` to true, this will automatically scale the valu
 Put the value in **Bytes** unit and it'll scale your value to range [0, 1024).
 (Only supports up to TerraByte level.)
 
-> ℹ️ To be exact, KiB or MiB is the right notation
-because raw values are divided with 1024 in `App.vue`.
-But this used the notation that doesn't insert "i" like KB or MB to unify units of the RAM usage and others.
+> [!note]
+> To be exact, KiB or MiB is the right notation because raw values are divided with 1024 in `App.vue`.
+> But this used the notation that doesn't insert "i" like KB or MB to unify units of the RAM usage and others.
 
 ### API
 In this section, you'll learn how to request to your server running `docker-stats-api`.\
 You can use `fetch()` in JS, `request` moudle in Python to send **GET** request to your server.
 
-> ℹ️ The examples below are written in situation with the following environment:
+> [!note]
+> The examples below are written in situation with the following environment:
 > - IP : 0.0.0.0
 > - PORT : 1202
 

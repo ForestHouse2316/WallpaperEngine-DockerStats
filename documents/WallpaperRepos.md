@@ -1,5 +1,6 @@
 # Wallpaper Repositories
-> ℹ️ Anyone can make pull requests to register their wallpaper repository on here.
+> [!note]
+> Anyone can make pull requests to register their wallpaper repository on here.
 Just add your one at the end of the list, and make PR!
 
 <table>
@@ -18,12 +19,15 @@ Just add your one at the end of the list, and make PR!
   </tr>
 </table>
 
-> ⚠️ Registering wallpapers does not mean it has gotten certificated or is safe.\
-So, please, always check whether it can be trusted.\
-**If you found the malicious one, please notice it to us by making an issue.**
+> [!warning]
+> Registering wallpapers does not mean it has gotten certificated or is safe.
+> So, please, always check whether it can be trusted.
+> **If you found the malicious one, please notice it to us by making an issue.**
 
-> ⚠️ And repetitively, whenever you use these wallpapers, **DO NOT USE `docker-stats-api` IMAGE FROM UNKOWN SOURCES**.\
-Only this repository and `foresthouse2316/docker-stats-api` in the DockerHub is the original.
+> [!caution]
+> Repetitively, whenever you use these wallpapers, **DO NOT USE `docker-stats-api` IMAGE FROM UNKOWN SOURCES**.
+> Only this repository and `foresthouse2316/docker-stats-api` in the DockerHub is the original.
+
 -----
 
 <table>
