@@ -58,7 +58,7 @@ docker run -d -p 1202:1202 -e ENV1="VAL1" -e ENV2="VAL2" --restart unless-stoppe
 
 This is the example:
 ```bash
-docker run -d -p 1202:1202 -e EXCCLUDES="docker-stats-api" -e ALLOW_FETCH_ALL_CONTAINERS="true" --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock --name docker-stats-api 
+docker run -d -p 1202:1202 -e EXCCLUDES="docker-stats-api" -e ALLOW_FETCH_ALL_CONTAINERS="true" --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock --name docker-stats-api foresthouse2316/docker-stats-api
 ```
 > [!warning]
 > There's a bug that continuous container stop with `excited with 137`. Before I find the reason, please make sure you have set the restart policies as `unless-stopped`. This will temporarily protect the API server from intermittent shutdowns.
