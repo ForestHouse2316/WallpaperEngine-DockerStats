@@ -23,25 +23,45 @@ Download the folder and execute this:
 docker build -t docker-stats-api . --no-cache
 ```
 
+> [!tip]
+> If you built the image manually, you should not type `foresthouse2316/docker-stats-api` since it's the docker hub image.
+> Type only `docker-stats-api`!
+
 
 ## Create container with options 🔨
 
 Now you can create the container from that image we just pulled(or built).
 ```bash
-docker run -d -p 1202:1202 -v /var/run/docker.sock:/var/run/docker.sock --name docker-stats-api docker-stats-api
+docker run -d -p 1202:1202 -v /var/run/docker.sock:/var/run/docker.sock --name docker-stats-api foresthouse2316/docker-stats-api
 ```
 
 There are some options you can set.\
 You can set them with `-e` argument of docker command, and `-e` can be written multiple times.
 ```bash
-docker run -d -p 1202:1202 -e ENV1="VAL1" -e ENV2="VAL2" -v /var/run/docker.sock:/var/run/docker.sock --name docker-stats-api 
+docker run -d -p 1202:1202 -e ENV1="VAL1" -e ENV2="VAL2" --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock --name docker-stats-api foresthouse2316/docker-stats-api
 ```
 |ENV Name|Value|Default|Description|
 |:---:|:---:|:---:|:---|
 |ALLOW_FETCH_ALL_CONTAINERS|boolean|false|If true, `http://IP_ADDRESS:1202/` will return all container stats.|
 |EXCLUDES|comma_separated<br/>string|""|Hides containers whose name is in this list.<br/>Separate container names like `-e EXCLUDES="a,b,c,d"`.|
-|SAVE_NETWORK_USAGE|**0**<br/>**1**(_compatible_)<br/>**2**(_extreme_)|0|**NOT IMPLEMENTED** ⚠️|
+|SAVE_NETWORK_USAGE|**0**<br/>**1**(_compatible_)<br/>**2**(_extreme_)|0|**NOT IMPLEMENTED** ⚠️<br/>**0** returns the raw value of the docker stats.<br/>**1(compatible mode)** returns necessary keys: `cpu_stats`, `memory_stats`, and etc.<br/>**2(extreme mode)** returns pre-calculated values.|
+|SHUTDOWN_TIME|seconds|86400<br/>_(=3600\*24)_|Automatically stop the server with SIGINT.<br/>You should set the API container's restart policies as `unless-stopped`.<br/>You can turn off this by `-e SHUTDOWN_TIMER="0"`.|
 
+> [!note]
+> **SAVE_NETWORK_USAGE** option returns these values in 1(compatible mode) and 2(extreme mode)
+> 1. `stat.cpu_stats`, `stat.precpu_stats`,
+> `stat.memory_stats.usage`,
+> `stat.networks[all adapters].tx_bytes`, `stat.networks[all adapters].rx_bytes`,
+> `stat.blkio_stats.io_service_bytes_recursive`
+> 2. Pre-calculated values with CSV format (`cpu,ram,tx,rx,read,write`).
+> Network and IO stats are aggregate values.
+
+This is the example:
+```bash
+docker run -d -p 1202:1202 -e EXCCLUDES="docker-stats-api" -e ALLOW_FETCH_ALL_CONTAINERS="true" --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock --name docker-stats-api foresthouse2316/docker-stats-api
+```
+> [!warning]
+> There's a bug that continuous container stop with `excited with 137`. Before I find the reason, please make sure you have set the restart policies as `unless-stopped`. This will temporarily protect the API server from intermittent shutdowns.
 
 ## Open firewall 🧱
 
@@ -77,6 +97,17 @@ Then you will be able to see some options like this:
 
 Input the server address, port number, and other information about your server to receive the docker stats data.
 
+## Some options you can adjust ✔️
+|Option|Description|
+|:-:|:-|
+|Show toast|Show toast. That's it!|
+|Aggregate stats|Display Tx/Rx and I/O as aggregate value when checked.
+|Stream/One-shot(legacy) mode|In **stream mode**, api server will continuously send stats data and pull interval will be ignored.<br/>**One-shot mode** is legacy, but if you want to set pull interval bigger than 5 seconds, you may use that. Don't use one-shot mode if pull interval is less than 2 seconds.|
+|Debug mode|Just make toasts containing informatic content. You should use this option with `Show Toast`.|
+
+> [!note]
+> This options can be changed by wallpaper authors.
+> Options above are the official(basic) options.
 
 ## Troubleshooting 🤯
 
@@ -101,7 +132,7 @@ And, also check this checklist:
 - Is port already occupied to another process?
 
 
-### Fetch timeout error on the low interval 🕑
+### Fetch (one-shot mode) timeout error on the low interval 🕑
 Requesting stats data too quickly is a DDoS attack to your server.
 If your API server cannot handle your pull interval, it will be result in timeout error on fetch method.
 Then, you can find your server's minimum interval with **debug mode**.

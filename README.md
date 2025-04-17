@@ -33,4 +33,10 @@ You can request to register your wallpaper repository on [HERE➡️](./document
 Click the title, and let's go to the **Developer Guide** 🌠
 
 ## License
-To be updated
+### This repository
+Custom license based on `MPL 2.0`.
+
+### 3rd Party
+|Name|License|
+|:-:|:-:|
+|Vue3|MIT|
