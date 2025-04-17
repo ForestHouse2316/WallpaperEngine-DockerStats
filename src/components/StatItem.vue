@@ -1,6 +1,7 @@
 <template>
     <div class="item">
         <p class="name">= {{ name }} =</p>
+        <p class="aggregate" v-if="aggregate">&nbsp;(aggregate)</p>
         <div class="value-container">
             <p class="value" v-if="autoDataUnit === false">{{ value.toFixed(2) }}</p>
             <p class="value" v-else>{{ (value / POW1024[pIdx]).toFixed(2) }}</p>
@@ -31,6 +32,10 @@ const props = defineProps({
         defualt: "",
     },
     autoDataUnit: { // Scale the value to fit in range [1, 1024), except the value exceeds 1024TB.
+        type: Boolean,
+        default: false,
+    },
+    aggregate: {
         type: Boolean,
         default: false,
     },

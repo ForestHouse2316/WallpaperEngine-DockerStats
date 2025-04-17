@@ -4,10 +4,10 @@
     <h1>{{ CONTAINER_NAME }}</h1>
     <StatItem name="CPU" :value="cpu" unit="%" />
     <StatItem name="RAM" :value="ram" :auto-data-unit="true" />
-    <StatItem name="TX" :value="tx" :auto-data-unit="true" />
-    <StatItem name="RX" :value="rx" :auto-data-unit="true" />
-    <StatItem name="Read" :value="read" :auto-data-unit="true" />
-    <StatItem name="Write" :value="write" :auto-data-unit="true" />
+    <StatItem name="TX" :value="tx" :auto-data-unit="true" :aggregate="AGGREGATE" />
+    <StatItem name="RX" :value="rx" :auto-data-unit="true" :aggregate="AGGREGATE" />
+    <StatItem name="Read" :value="read" :auto-data-unit="true" :aggregate="AGGREGATE" />
+    <StatItem name="Write" :value="write" :auto-data-unit="true" :aggregate="AGGREGATE" />
 
     <!-- SHOW_ALL_UI -->
     <div class="show-all-ui-container" v-if="SHOW_ALL_UI">
@@ -26,7 +26,7 @@ import StatItem from "./components/StatItem.vue";
 import ToastList from "./components/ToastList.vue";
 // module (import order is IMPORTANT. toast => user-props => puller)
 import { deleteToast, messages } from "./toast";
-import { SHOW_ALL_UI, SHOW_TOAST, CONTAINER_NAME } from "./user-props";
+import { SHOW_ALL_UI, SHOW_TOAST, CONTAINER_NAME, AGGREGATE } from "./user-props";
 import { refresh, cpu, ram, tx, rx, read, write } from "./puller";
 
 // start puller
