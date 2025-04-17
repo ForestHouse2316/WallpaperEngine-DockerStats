@@ -97,6 +97,17 @@ Then you will be able to see some options like this:
 
 Input the server address, port number, and other information about your server to receive the docker stats data.
 
+## Some options you can adjust ✔️
+|Option|Description|
+|:-:|:-|
+|Show toast|Show toast. That's it!|
+|Aggregate stats|Display Tx/Rx and I/O as aggregate value when checked.
+|Stream/One-shot(legacy) mode|In **stream mode**, api server will continuously send stats data and pull interval will be ignored.<br/>**One-shot mode** is legacy, but if you want to set pull interval bigger than 5 seconds, you may use that. Don't use one-shot mode if pull interval is less than 2 seconds.|
+|Debug mode|Just make toasts containing informatic content. You should use this option with `Show Toast`.|
+
+> [!note]
+> This options can be changed by wallpaper authors.
+> Options above are the official(basic) options.
 
 ## Troubleshooting 🤯
 
@@ -121,7 +132,7 @@ And, also check this checklist:
 - Is port already occupied to another process?
 
 
-### Fetch timeout error on the low interval 🕑
+### Fetch (one-shot mode) timeout error on the low interval 🕑
 Requesting stats data too quickly is a DDoS attack to your server.
 If your API server cannot handle your pull interval, it will be result in timeout error on fetch method.
 Then, you can find your server's minimum interval with **debug mode**.
