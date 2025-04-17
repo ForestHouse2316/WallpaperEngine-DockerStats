@@ -11,6 +11,7 @@
 </template>
 
 <script setup>
+// TODO implement automatic aggregate tag by importing AGGREGATE
 import { computed } from 'vue';
 
 const POW1024 = [1, 1024, Math.pow(1024, 2), Math.pow(1024, 3), Math.pow(1024, 4)];
