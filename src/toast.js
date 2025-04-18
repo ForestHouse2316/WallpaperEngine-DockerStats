@@ -2,8 +2,8 @@ import { ref } from "vue";
 import { SHOW_TOAST } from "./user-props";
 
 export const messages = ref({}); // used object to maintain order and state of toast components
-const toastIDStart = ref(0);
-const toastIDEnd = ref(0);
+export const toastIDStart = ref(0);
+export const toastIDEnd = ref(0);
 
 
 

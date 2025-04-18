@@ -25,7 +25,7 @@
 import StatItem from "./components/StatItem.vue";
 import ToastList from "./components/ToastList.vue";
 // module (import order is IMPORTANT. toast => user-props => puller)
-import { deleteToast, messages } from "./toast";
+import { deleteToast, messages, toastIDStart } from "./toast";
 import { SHOW_ALL_UI, SHOW_TOAST, CONTAINER_NAME, AGGREGATE } from "./user-props";
 import { refresh, cpu, ram, tx, rx, read, write } from "./puller";
 
