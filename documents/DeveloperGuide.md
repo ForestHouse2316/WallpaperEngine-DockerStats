@@ -119,6 +119,8 @@ The table below shows the basic keys you need to add to the Wallpaper Engine Edi
 |containername|docker-stats-api|Target container's name. Containers excluded by the user will return "not found" error.|
 |pullinterval|5000|Stats data pulling interval. Unit is milliseconds(ms).|
 |showtoast|checked|Show the toast when checked, if not, hides all.|
+|aggregate|checked|Show aggregate values for Tx/Rx and disk I/O.|
+|streammode|checked|Enable stream mode on docker api client and get them via SSE.|
 |debugmode|unchecked|Show the debug toast when checked. Works only when `showtoast` is checked.
 
 You can use [project.json](../project.json) to register user properties when making wallpaper.
