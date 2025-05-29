@@ -42,4 +42,12 @@ Just add your one at the end of the list, and make PR!
     <td>Just <b>BASIC</b><br/>
         This is the wallpaper built from this repository.</td>
   </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/6bec0cfb-0a69-4589-96cb-c5bb06d4b0fc" style="width: auto; height: 150px; object-fit: cover;"></td>
+    <td><a href="https://github.com/GanyuLover/WallpaperEngine-DockerStats-Ganyu">DockerStats:<br/>Ganyu Edition</a><br/>
+      (<i>Currently not available,<br/>because this account has tagged as "spammy".</i>😥)<br/>
+      <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3489737351">Visit SteamWorkshop ></a></td>
+    <td><b>Ganyu</b> with galze lily.<br/>
+        Including sliding stats screen!</td>
+  </tr>
 </table>
